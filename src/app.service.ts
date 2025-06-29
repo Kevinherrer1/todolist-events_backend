@@ -39,4 +39,8 @@ export class AppService {
     Object.assign(task, updateData);
     return this.taskRepository.save(task);
   }
+
+  async deleteEvent(eventId: number): Promise<void> {
+    await this.eventRepository.delete(eventId);
+  }
 }

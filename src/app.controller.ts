@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -56,5 +56,11 @@ export class AppController {
       data: task,
       timestamp: new Date().toISOString()
     };
+  }
+
+  @Delete('events/:eventId')
+  async deleteEvent(@Param('eventId') eventId: number) {
+    await this.appService.deleteEvent(eventId);
+    return { message: 'Evento eliminado exitosamente' };
   }
 }
