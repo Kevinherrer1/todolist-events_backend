@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,11 +11,11 @@ import { Task } from './task.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1234',
-      database: 'todolist-events',
+      host: process.env.DATABASE_HOST || '',
+      port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+      username: process.env.DATABASE_USER || '',
+      password: process.env.DATABASE_PASSWORD || '',
+      database: process.env.DATABASE_NAME || '',
       entities: [Event, Task],
       synchronize: true,
     }),
